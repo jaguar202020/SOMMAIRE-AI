@@ -1,0 +1,5 @@
+export const isDev = process.env.NODE_ENV == "development";
+
+export const ORIGIN_URL =
+  process.env.NEXT_PUBLIC_APP_URL ||
+  (isDev ? "http://localhost:3000" : "http://localhost:3000");
