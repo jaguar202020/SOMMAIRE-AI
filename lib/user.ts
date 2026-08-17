@@ -15,8 +15,7 @@ export async function getPriceIdForActiveUser(email: string) {
 export async function hasActivePlan(email: string) {
   const sql = await getDbConnection();
 
-  const query =
-    await sql`
+  const query = await sql`
       SELECT price_id, status
       FROM users
       WHERE email = ${email}
@@ -33,7 +32,7 @@ export async function hasReachedUploadLimit(userId: string) {
   const [userRecord] =
     await sql`SELECT price_id, status FROM users WHERE customer_id = ${userId} OR email = ${userId}`;
   const priceId =
-    userRecord?.status === "active" ? userRecord?.price_id ?? null : null;
+    userRecord?.status === "active" ? (userRecord?.price_id ?? null) : null;
 
   const isPro =
     pricingPlans.find((plan) => plan.priceId === priceId)?.id === "pro";

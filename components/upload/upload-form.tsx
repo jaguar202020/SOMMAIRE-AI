@@ -88,6 +88,15 @@ export default function UploadForm() {
 
       const { data = null } = result || {};
 
+      if (!result?.success || !data?.summary) {
+        toast("Unable to generate summary", {
+          description:
+            result?.message || "Please try again with a different PDF.",
+          style: { color: "red" },
+        });
+        return;
+      }
+
       if (data?.summary) {
         toast("Saving PDF...", {
           description: "Hang tight! We are saving your summary.",
@@ -117,6 +126,11 @@ export default function UploadForm() {
       }
     } catch (error) {
       console.error("Error occurred", error);
+      toast("Something went wrong", {
+        description:
+          error instanceof Error ? error.message : "Please try again.",
+        style: { color: "red" },
+      });
       formRef.current?.reset();
     } finally {
       setIsLoading(false);

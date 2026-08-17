@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { useState } from "react";
 import { NavigationControls } from "./navigation-controls";
 import ProgressBar from "./progress-bar";
-import { parseSection } from "@/utils/summary-helper";
+import { parseSection, splitSummaryIntoSections } from "@/utils/summary-helper";
 import ContentSection from "./content-section";
 import { MotionDiv } from "../common/motion-wrapper";
 
@@ -26,11 +26,7 @@ export function SummaryViewer({ summary }: { summary: string }) {
   const handlePrevious = () =>
     setCurrentSection((prev) => Math.max(prev - 1, 0));
 
-  const sections = summary
-    .split("\n#")
-    .map((section) => section.trim())
-    .filter(Boolean)
-    .map(parseSection);
+  const sections = splitSummaryIntoSections(summary).map(parseSection);
 
   return (
     <Card className="relative h-[500px] w-full overflow-hidden rounded-3xl border border-rose-500/10 bg-linear-to-br from-background via-background/95 to-rose-500/5 px-2 shadow-2xl backdrop-blur-lg sm:h-[600px] lg:h-[700px] xl:w-[600px]">

@@ -28,7 +28,7 @@ const RegularPoint = ({ point }: { point: string }) => {
     >
       <div className="absolute inset-0 bg-linear-to-r from-gray-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
 
-      <p className="relativetext-lg lg:text-xl text-muted-foreground/90 leading-relaxed text-left">
+      <p className="relative text-lg lg:text-xl text-muted-foreground/90 leading-relaxed text-left">
         {point}
       </p>
     </MotionDiv>
@@ -51,10 +51,11 @@ export default function ContentSection({
     >
       {points.map((point, index) => {
         const { isMainPoint, hasEmoji, isEmpty } = parsePoint(point);
+        const emojiPoint = parseEmojiPoint(point);
 
         if (isEmpty) return null;
 
-        if (hasEmoji || isMainPoint) {
+        if ((hasEmoji || isMainPoint) && emojiPoint) {
           return <EmojiPoint key={`point-${index}`} point={point} />;
         }
         return <RegularPoint key={`point-${index}`} point={point} />;

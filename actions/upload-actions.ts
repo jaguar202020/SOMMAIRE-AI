@@ -38,6 +38,14 @@ export async function generatePdfSummary({
       summary = await generateSummaryFromGemini(pdfText);
     } catch (error) {
       console.error("Failed to generate summary", error);
+      return {
+        success: false,
+        message:
+          error instanceof Error
+            ? error.message
+            : "Failed to generate summary",
+        data: null,
+      };
     }
 
     if (!summary) {
@@ -59,9 +67,11 @@ export async function generatePdfSummary({
       },
     };
   } catch (error) {
+    console.error("Failed to process PDF", error);
     return {
       success: false,
-      message: "File upload failed",
+      message:
+        error instanceof Error ? error.message : "Failed to process PDF",
       data: null,
     };
   }

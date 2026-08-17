@@ -1,7 +1,7 @@
-# Summarie
+# Sommaire
 
 ## Overview
-Summarie is a Next.js application that turns uploaded PDF documents into readable AI-generated summaries. Authenticated users can upload a PDF, let Gemini generate a structured summary, and then review past summaries from a protected dashboard.
+Sommaire is a Next.js application that turns uploaded PDF documents into readable AI-generated summaries. Authenticated users can upload a PDF, let Gemini generate a structured summary, and then review past summaries from a protected dashboard.
 
 ## Features
 - PDF upload flow with authenticated access control
